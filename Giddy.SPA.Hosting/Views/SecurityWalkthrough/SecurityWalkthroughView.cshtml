@@ -1,0 +1,19 @@
+﻿@model Giddy.SPA.Hosting.Views.SecurityWalkthrough.SecurityWalkthroughViewModel
+@{
+    ViewBag.Title = @Model.Title;
+}
+
+@if(User.Identity.IsAuthenticated){
+    using (Html.BeginForm(@MVC.Account.LogOff())){
+        @Html.AntiForgeryToken();
+        <button type="submit">Log Off</button>
+    }
+}
+
+<hr />
+
+<h2>@Model.Title</h2>
+
+<p>@Model.Message</p>
+
+<p>@Html.ActionLink("Next", @Model.NextRoute)</p>

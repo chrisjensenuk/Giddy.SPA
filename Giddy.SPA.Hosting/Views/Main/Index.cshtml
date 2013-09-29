@@ -1,0 +1,18 @@
+﻿@{Layout = null;}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/durandal.css" rel="stylesheet" />
+    <title>Main</title>
+</head>
+<body>
+    <!--applicationHost needed for durandal-->
+    <div id="applicationHost">
+
+    </div>
+    @Html.RequireJsScript("~/app/main.js")
+</body>
+</html>

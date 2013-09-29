@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>TrafficCop</id>
+    <version>0.3.1</version>
+    <title>TrafficCop</title>
+    <authors>Jim Cowart</authors>
+    <owners>Jim Cowart</owners>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license</licenseUrl>
+    <projectUrl>https://github.com/ifandelse/TrafficCop</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Simple JavaScript library to prevent multiple simultaneous client requests to same HTTP endpoint.  After one active request, subsequent requests with identical request metadata have their callbacks queued with the first/active request, preventing the need for multiple unnecessary round trips to a server.</description>
+    <summary>Simple JavaScript library to prevent multiple simultaneous client requests to same HTTP endpoint. Dual-licensed MIT and GPL</summary>
+    <releaseNotes>Requires jQuery 1.5.4 or higher.</releaseNotes>
+    <copyright>2011 Jim Cowart (MIT/GPL)</copyright>
+    <tags>ajax javascript request</tags>
+    <dependencies>
+      <dependency id="jQuery" version="1.5.4" />
+    </dependencies>
+  </metadata>
+</package>

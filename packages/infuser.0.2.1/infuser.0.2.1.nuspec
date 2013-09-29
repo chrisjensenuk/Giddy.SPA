@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>infuser</id>
+    <version>0.2.1</version>
+    <title>infuser</title>
+    <authors>Jim Cowart</authors>
+    <owners>Jim Cowart</owners>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license</licenseUrl>
+    <projectUrl>https://github.com/ifandelse/infuser</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Lightweight JavaScript library to be used for pulling external templates &amp; other content asynchronously/synchronously. (see http://freshbrewedcode.com/jimcowart/2011/11/30/infuser-a-template-loader/)</description>
+    <summary>Lightweight JavaScript library to be used for pulling external templates &amp; other content asynchronously/synchronously.</summary>
+    <copyright>2011 Jim Cowart (MIT/GPL)</copyright>
+    <tags>template javascript ajax</tags>
+    <dependencies>
+      <dependency id="TrafficCop" version="0.3.0" />
+    </dependencies>
+  </metadata>
+</package>

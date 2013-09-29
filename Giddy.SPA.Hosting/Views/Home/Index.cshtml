@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@section headscripts{
+    <script src="~/Scripts/require.js" data-main="/Scripts/app/home-main.js"></script>
+}
+
+@section scripts {
+    <script src="~/Scripts/app/HelloModel.js"></script>
+    <script src="~/Scripts/app/HelloViewModel.js"></script>
+    <script src="~/Scripts/app/EditableViewModel.js"></script>
+}
+
+@section ko_apply {
+
+    var viewModel = new APP.HelloViewModel();
+    ko.applyBindings(viewModel, $("#helloTitle")[0]);
+
+    var editableViewModel = new APP.EditableViewModel();
+    ko.applyBindings(editableViewModel, $("#editableViewModel")[0]);
+}
+
+<h2>Index</h2>
+
+<p>@Html.ActionLink("Security Walkthrough", MVC.SecurityWalkthrough.NotSecured())</p>
+
+<div id="helloTitle" data-bind="with: helloModel">
+
+    <input type="text" data-bind="value: name" />
+    <p data-bind="validationMessage: name">Must be at least 3 chars</p>
+
+    <h2 data-bind="text: name"></h2>
+
+    <h2>Ajax: <span data-bind="text: fooName"></span></h2>
+</div>
+
+<hr />
+
+<div id="editableViewModel">
+    <h1>Editable View Model</h1>
+
+    <input data-bind="value: name.editValue" />
+
+    <button data-bind="click: name.accept">Accept</button>
+
+    <h2>notice how the model is polluted with the temporary values. model only gets updated if you hit Accept</h2>
+    <pre data-bind="text: ko.toJSON($data, null, 2)"></pre>
+</div>

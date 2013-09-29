@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Knockout.js_External_Template_Engine</id>
+    <version>2.0.5</version>
+    <title>Knockout.js External Template Engine</title>
+    <authors>Jim Cowart</authors>
+    <owners>Jim Cowart</owners>
+    <licenseUrl>http://www.opensource.org/licenses/mit-license</licenseUrl>
+    <projectUrl>https://github.com/ifandelse/Knockout.js-External-Template-Engine</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>The Knockout.js External Template Engine extends Knockout.js to allow you to load templates asynchronously from a remote resource. It currently supports both native and jquery templates. Special thanks to Ryan Niemeyer for the assistance in getting jquery templates working in this version of the plugin.</description>
+    <summary>The Knockout.js External Template Engine extends Knockout.js to allow you to load templates asynchronously from a remote resource. It currently supports both native and jquery templates.</summary>
+    <releaseNotes>NOTE: The Knockout.js External Template Engine depends on "TrafficCop" and "infuser".  Both TrafficCop and infuser will pull down standard js libs (wrapped in an immediately invoked function expression) and also AMD module versions.  If you do not need the AMD/require.js version of this plugin, simply include TrafficCop, infuser and koExternalTemplateEngine.js (or the .min.js version) in your project - OR include koExternalTemplateEngine_all.js, which is combined build of TrafficCop, infuser and this plugin.  If you are using the AMD module version, you will need to include koExternalTemplateEngine-amd.js (or the .min.js version), along with the AMD builds of TrafficCop and infuser.  It will be ideal if you set up named modules in your require.config using the names "TrafficCop", "infuser" and "koext" - case sensitive (see the example/amd folder for this plugin on github).  The AMD version of this plugin requires Knockout.js 2.1 or later.  
+
+IF ALL ELSE FAILS AND YOU'RE NOT SURE WHAT TO DO: Delete everything this nuget installs EXCEPT for the koExternalTemplateEngine_all.js file. :-)</releaseNotes>
+    <copyright>2011 Jim Cowart (MIT)</copyright>
+    <language />
+    <tags>knockout template javascript</tags>
+    <dependencies>
+      <dependency id="infuser" version="0.2.1" />
+      <dependency id="knockoutjs" version="2.0.0" />
+    </dependencies>
+  </metadata>
+</package>

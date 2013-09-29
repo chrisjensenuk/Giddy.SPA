@@ -1,0 +1,24 @@
+﻿<div class="messageBox">
+    <div class="modal-header">
+        <h3>Log in</h3>
+    </div>
+    <div class="modal-body" data-bind="with: model">
+        <div>
+            <div>User name</div>
+            <input type="text" data-bind="value: username" />
+        </div>
+
+        <div>
+            <div>Password</div>
+            <input type="password" data-bind="value: password" />
+        </div>
+
+        <div>
+            <div>Remember me</div>
+            <input type="checkbox" data-bind="checked: rememberMe" />
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-primary" data-bind="click: login, enable: model.isValid">Ok</button>
+    </div>
+</div>

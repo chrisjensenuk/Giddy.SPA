@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Giddy.SPA.Hosting", "Giddy.SPA.Hosting\Giddy.SPA.Hosting.csproj", "{96874ABE-CD0B-4694-80F8-D6E8FE65E31B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Giddy.SPA.Security", "Giddy.SPA.Security\Giddy.SPA.Security.csproj", "{024B4D16-B9EC-44FA-83F9-F9D0DEF452CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{42E8FF98-2085-46AA-A8BF-C2DD5CB6FA00}"
+	ProjectSection(SolutionItems) = preProject
+		readme.md = readme.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Giddy.Utility", "Giddy.Utility\Giddy.Utility.csproj", "{2ED6E755-8BBB-4F76-A6E2-FBC1E870E864}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A3875C6E-EC18-4217-B6D7-252961B3251A}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{96874ABE-CD0B-4694-80F8-D6E8FE65E31B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96874ABE-CD0B-4694-80F8-D6E8FE65E31B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96874ABE-CD0B-4694-80F8-D6E8FE65E31B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96874ABE-CD0B-4694-80F8-D6E8FE65E31B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{024B4D16-B9EC-44FA-83F9-F9D0DEF452CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{024B4D16-B9EC-44FA-83F9-F9D0DEF452CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{024B4D16-B9EC-44FA-83F9-F9D0DEF452CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{024B4D16-B9EC-44FA-83F9-F9D0DEF452CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ED6E755-8BBB-4F76-A6E2-FBC1E870E864}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ED6E755-8BBB-4F76-A6E2-FBC1E870E864}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ED6E755-8BBB-4F76-A6E2-FBC1E870E864}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ED6E755-8BBB-4F76-A6E2-FBC1E870E864}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
