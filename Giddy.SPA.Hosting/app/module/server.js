@@ -34,7 +34,7 @@
             })
             .fail(function (err) {
                 _isLoggedIn(false);
-                dfd.reject();
+                dfd.reject(err, loginModel);
             });
 
         return dfd.promise();
@@ -84,12 +84,47 @@
         return dfd.promise();
     }
 
+    //Errors from the server could just be string value containing the message or a representation of the server ModelState. If so map the ModelState to knockout validation
+    //You need to add a property to each validated observable. E.g. username.modelStateProperty = 'model.UserName';
+    //Err = error sent from the server (a string or the ModelState object)
+    //model = the observable model what was sent to the server
+    //obsServerMessage = the observable to write the server error message to.
+    var _mapServerErrorToValidation = function (err, model, obsServerMessage) {
+
+        if (typeof err == 'string') {
+            obsServerMessage(err);
+            return;
+        }
+
+        if (err.ModelState === undefined) {
+            throw new Error("don't know how to handle this server error yet");
+        }
+
+        obsServerMessage(err.Message);
+
+        var m = model();
+
+        //for each observable in the model see if a modelStateProperty has been defined
+        for (var obs in m) {
+            var observable = m[obs];
+            if (observable.modelStateProperty) {
+                var errors = err.ModelState[observable.modelStateProperty];
+
+                if (errors !== undefined) {
+                    //manually set the knockout validation error
+                    observable.setError(errors[0]);
+                }
+            }
+        }
+    }
+
     return {
         ajaxJson: _ajaxJson,
         isLoggedIn: _isLoggedIn,
         checkIsLoggedIn: _checkIsLoggedIn,
         logIn: _logIn,
-        logOut: _logOut
+        logOut: _logOut,
+        mapServerErrorToValidation: _mapServerErrorToValidation
     }
 
 });

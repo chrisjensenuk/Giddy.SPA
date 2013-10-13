@@ -8,11 +8,13 @@ namespace Giddy.SPA.Hosting.Models
 {
     public class LoginModel
     {
-        [Required]
+        //[Required]
+        [MinLength(5)]
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
-        [Required]
+        //[Required]
+        [MinLength(5)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }

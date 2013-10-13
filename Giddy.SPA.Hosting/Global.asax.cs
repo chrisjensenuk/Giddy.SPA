@@ -1,4 +1,5 @@
 ﻿using Giddy.SPA.Hosting.Data;
+using Giddy.SPA.Hosting.Filters.Http;
 using Giddy.SPA.Hosting.IoC;
 using Giddy.SPA.Hosting.Security;
 using System;
@@ -29,6 +30,9 @@ namespace Giddy.SPA.Hosting
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //Set up the Http View Model filter globally so applied to all Web Api models
+            GlobalConfiguration.Configuration.Filters.Add(new ValidationActionFilterAttribute());
 
             //Set up IoC
             SimpleInjectorInitializer.Initialize();

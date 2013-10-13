@@ -1,6 +1,7 @@
 ﻿using AttributeRouting.Web.Http;
 using Giddy.SPA.Hosting.Filters.Http;
 using Giddy.SPA.Hosting.Models;
+using Giddy.SPA.Hosting.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +10,30 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Web.Helpers;
 using System.Web.Http;
+using System.Web.Security;
 using WebMatrix.WebData;
 
 namespace Giddy.SPA.Hosting.Controllers.Http
 {
+    //[Authorize]
     public class AccountApiController : ApiControllerBase
     {
+        protected readonly ISecurityManager _securityMgr;
+
+        public AccountApiController(ISecurityManager securityMgr)
+        {
+            _securityMgr = securityMgr;
+        }
+ 
+
         [HttpGet]
+        //[AllowAnonymous]
         [GET("/api/checkloggedin")]
         public HttpResponseMessage CheckLoggedIn(HttpRequestMessage request)
         {
             return BuildHttpResponse(request, () =>
             {
-                return User.Identity.IsAuthenticated;
+                return _securityMgr.LoggedIn;
             });
         }
 
@@ -29,16 +41,15 @@ namespace Giddy.SPA.Hosting.Controllers.Http
         [AllowAnonymous]
         [POST("/api/login")]
         [ValidateAntiForgeryToken]
-        [ValidationActionFilter]
         public HttpResponseMessage Login(HttpRequestMessage request, LoginModel model)
         {
             return BuildHttpResponse(request, () =>
             {
-                var loggedIn = WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe);
+                var loggedIn = _securityMgr.Login(model);
 
                 if (!loggedIn)
                 {
-                    return request.CreateResponse(HttpStatusCode.Unauthorized, "The user name or password provided is incorrect.");
+                    return request.CreateResponse(HttpStatusCode.BadRequest, "The user name or password provided is incorrect.");
                 }
 
                 return request.CreateResponse(HttpStatusCode.OK, true);
@@ -52,7 +63,7 @@ namespace Giddy.SPA.Hosting.Controllers.Http
         {
             return BuildHttpResponse(request, () =>
                 {
-                    WebSecurity.Logout();
+                    _securityMgr.Logout();
                 });
         }
 
@@ -79,5 +90,30 @@ namespace Giddy.SPA.Hosting.Controllers.Http
                     return response;
                 });
         }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public virtual HttpResponseMessage Register(HttpRequestMessage request, RegisterModel model)
+        {
+            return BuildHttpResponse(request, () =>
+            {
+                // Attempt to register the user
+                try
+                {
+                    _securityMgr.Register(model);
+
+                    return request.CreateResponse(HttpStatusCode.OK, true);
+                }
+                catch (SecurityManagerException e)
+                {
+                    return request.CreateErrorResponse(HttpStatusCode.BadRequest, e.Message);
+                }
+
+            });
+        }
+
+       
+        }
     }
-}
+

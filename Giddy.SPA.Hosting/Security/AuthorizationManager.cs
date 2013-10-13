@@ -11,7 +11,7 @@ using System.Web.Security;
 namespace Giddy.SPA.Hosting.Security
 {
 
-    public interface ISecurityManager
+    public interface IAuthorizationManager
     {
         bool CheckAccess(string operation);
     }
@@ -19,10 +19,10 @@ namespace Giddy.SPA.Hosting.Security
     /// <summary>
     /// Using a factory to return the UserPermissionCache as the cache is relying on Session which doesn't exist at time
     /// </summary>
-    public class SecurityManager : ISecurityManager
+    public class AuthorizationManager : IAuthorizationManager
     {
         readonly IUserPermissionCacheFactory _userPermissionCacheFactory;
-        public SecurityManager(IUserPermissionCacheFactory userPermissionCacheFactory)
+        public AuthorizationManager(IUserPermissionCacheFactory userPermissionCacheFactory)
         {
             _userPermissionCacheFactory = userPermissionCacheFactory;
         }

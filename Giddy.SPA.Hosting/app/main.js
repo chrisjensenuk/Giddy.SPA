@@ -16,7 +16,7 @@
     }
 });
 
-define(['durandal/system', 'durandal/app', 'durandal/viewLocator'], function (system, app, viewLocator) {
+define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'knockout', 'validation'], function (system, app, viewLocator, ko) {
     //>>excludeStart("build", true);
     system.debug(true);
     //>>excludeEnd("build");
@@ -30,6 +30,11 @@ define(['durandal/system', 'durandal/app', 'durandal/viewLocator'], function (sy
         widget: {
             kinds: ['expander']
         }
+    });
+
+    //intialize knockout validation
+    ko.validation.init({
+        errorMessageClass: "text-danger"
     });
 
     app.start().then(function () {

@@ -11,6 +11,6 @@ namespace Giddy.SPA.Hosting
     {
         public MvcControllerBase() : base() { }
 
-        public ISecurityManager SecurityMgr { get; set; }
+        public IAuthorizationManager AuthorizationMgr { get; set; }
     }
 }

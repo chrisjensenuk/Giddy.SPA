@@ -16,7 +16,7 @@ namespace Giddy.SPA.Hosting.Security
     {
         readonly string _operation;
 
-        public ISecurityManager SecurityMgr {get;set;}
+        public IAuthorizationManager AuthorizationMgr {get;set;}
 
         public OperationAuthorizeAttribute(string Operation)
         {
@@ -39,7 +39,7 @@ namespace Giddy.SPA.Hosting.Security
                 operation = ReplaceOperationPlaceholder(operation, operationParam.ToString(), filterContext.ActionParameters);
             }
 
-            authorised = SecurityMgr.CheckAccess(operation);
+            authorised = AuthorizationMgr.CheckAccess(operation);
 
             if (!authorised)
             {

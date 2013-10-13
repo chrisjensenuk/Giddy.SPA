@@ -9,7 +9,8 @@ using System.Net;
 
 namespace Giddy.SPA.Hosting.Filters.Http
 {
-    public class ValidationActionFilter : ActionFilterAttribute
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+    public class ValidationActionFilterAttribute : ActionFilterAttribute
     {
         public override void OnActionExecuting(HttpActionContext actionContext)
         {

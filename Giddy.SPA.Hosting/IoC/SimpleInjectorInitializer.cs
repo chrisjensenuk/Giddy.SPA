@@ -8,6 +8,9 @@ namespace Giddy.SPA.Hosting.IoC
     using NetSqlAzMan.Cache;
     using System;
     using System.Web.Mvc;
+    using Giddy.SPA.Hosting.Services;
+    using System.Web.Http.Dispatcher;
+    using System.Web.Http;
     
     public static class SimpleInjectorInitializer
     {
@@ -31,29 +34,45 @@ namespace Giddy.SPA.Hosting.IoC
             container.Verify();
             
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
+            GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
+            
         }
      
         private static void InitializeContainer(Container container)
         {
-            // For instance:
-            // container.Register<IUserRepository, SqlUserRepository>();
+            
+            //register Http Controllers
+            var services = GlobalConfiguration.Configuration.Services;
+            var controllerTypes = services.GetHttpControllerTypeResolver().GetControllerTypes(services.GetAssembliesResolver());
+
+            // register Web API controllers (important! http://bit.ly/1aMbBW0)
+            foreach (var controllerType in controllerTypes)
+            {
+                container.Register(controllerType);
+            }
+
             container.Register<IGiddySPAContext, GiddySPAContext>();
+
+            container.Register<ISecurityManager, WebSecurityManager>();
             
             //Only need one of these object per web request
-            container.RegisterPerWebRequest<ISecurityManager, SecurityManager>();
+            container.RegisterPerWebRequest<IAuthorizationManager, AuthorizationManager>();
             
             container.Register<IUserPermissionCacheFactory, UserPermissionCacheFactory>();
             
             container.RegisterInitializer<OperationAuthorizeAttribute>(handler =>
             {
-                handler.SecurityMgr = container.GetInstance<ISecurityManager>();
+                handler.AuthorizationMgr = container.GetInstance<IAuthorizationManager>();
             });
 
             container.RegisterInitializer<MvcControllerBase>(handler =>
                 {
-                    handler.SecurityMgr = container.GetInstance<ISecurityManager>();
+                    handler.AuthorizationMgr = container.GetInstance<IAuthorizationManager>();
                 });
+
         }
+
+        
     }
 
     

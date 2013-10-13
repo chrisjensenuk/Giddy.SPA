@@ -10,15 +10,7 @@ namespace Giddy.SPA.Hosting.Models
 {
     
 
-    [Table("UserProfile")]
-    public class UserProfile
-    {
-        [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public int UserId { get; set; }
-        public string UserName { get; set; }
-        public string FullName { get; set; }
-    }
+    
 
     public class RegisterExternalLoginModel
     {

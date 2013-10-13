@@ -125,7 +125,7 @@ namespace Giddy.SPA.Hosting.Controllers.Web
 
         private bool CheckOperationAccess(string operation)
         {
-            return SecurityMgr.CheckAccess(operation);
+            return AuthorizationMgr.CheckAccess(operation);
         }
 
     }
