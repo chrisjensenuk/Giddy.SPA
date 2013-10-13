@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FluentValidation;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -21,5 +22,14 @@ namespace Giddy.SPA.Hosting.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+    }
+
+    public class LoginModelValidator : AbstractValidator<LoginModel>
+    {
+        public LoginModelValidator()
+        {
+            RuleFor(l => l.UserName).Length(5, 100);
+            RuleFor(l => l.Password).Length(5, 100);
+        }
     }
 }

@@ -129,6 +129,9 @@
     <Reference Include="DotNetOpenAuth.OpenIdOAuth">
       <HintPath>..\packages\DotNetOpenAuth.OpenIdOAuth.4.3.1.13153\lib\net45-full\DotNetOpenAuth.OpenIdOAuth.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation">
+      <HintPath>..\packages\FluentValidation.4.0.0.1\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.2.0.30506.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
@@ -299,6 +302,7 @@
     <Compile Include="Security\AuthorizationManager.cs" />
     <Compile Include="Security\SimpleMembershipInitializer.cs" />
     <Compile Include="Security\UserPermissionCacheFactory.cs" />
+    <Compile Include="Services\ValidatorFactory.cs" />
     <Compile Include="Services\WebSecurityManager.cs" />
     <Compile Include="SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>

@@ -1,4 +1,5 @@
-﻿using Giddy.SPA.Hosting.Models;
+﻿using FluentValidation;
+using Giddy.SPA.Hosting.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +26,14 @@ namespace Giddy.SPA.Hosting.Services
 
     public class WebSecurityManager : ISecurityManager
     {
+        protected readonly IValidatorFactory _validators;
+
+        public WebSecurityManager(IValidatorFactory validators)
+        {
+            _validators = validators;
+        }
+
+
         public bool LoggedIn
         {
             get
@@ -36,6 +45,13 @@ namespace Giddy.SPA.Hosting.Services
 
         public bool Login(LoginModel login)
         {
+
+            //validate the model using Fluent Validation
+            var validation = _validators.GetValidator<LoginModel>().Validate(login);
+
+            //TODO: investigate whether to create an attribute to check validation just after model binding so we don't have to handle inside the method.
+            //will need to decide on a standard way to return errors via JSON.
+
             return WebSecurity.Login(login.UserName, login.Password, persistCookie: login.RememberMe);
         }
 

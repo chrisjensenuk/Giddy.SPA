@@ -3,6 +3,7 @@ namespace Giddy.SPA.Hosting.IoC
     using System.Reflection;
     using SimpleInjector;
     using SimpleInjector.Integration.Web.Mvc;
+    using SimpleInjector.Extensions;
     using Giddy.SPA.Hosting.Security;
     using NetSqlAzMan.Interfaces;
     using NetSqlAzMan.Cache;
@@ -11,10 +12,12 @@ namespace Giddy.SPA.Hosting.IoC
     using Giddy.SPA.Hosting.Services;
     using System.Web.Http.Dispatcher;
     using System.Web.Http;
+    using FluentValidation;
+    using Giddy.SPA.Hosting.Models;
     
     public static class SimpleInjectorInitializer
     {
-        /// <summary>Initialize the container and register it as MVC3 Dependency Resolver.</summary>
+        /// <summary>Initialize the container and register it as MVC Dependency Resolver.</summary>
         public static void Initialize()
         {
             // Did you know the container can diagnose your configuration? Go to: http://bit.ly/YE8OJj.
@@ -54,10 +57,15 @@ namespace Giddy.SPA.Hosting.IoC
             container.Register<IGiddySPAContext, GiddySPAContext>();
 
             container.Register<ISecurityManager, WebSecurityManager>();
+
+            //register Fluent Validators
+            container.Register<IValidatorFactory, ValidatorFactory>();
+            var assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            container.RegisterManyForOpenGeneric(typeof(IValidator<>), assemblies);
             
             //Only need one of these object per web request
             container.RegisterPerWebRequest<IAuthorizationManager, AuthorizationManager>();
-            
+
             container.Register<IUserPermissionCacheFactory, UserPermissionCacheFactory>();
             
             container.RegisterInitializer<OperationAuthorizeAttribute>(handler =>
