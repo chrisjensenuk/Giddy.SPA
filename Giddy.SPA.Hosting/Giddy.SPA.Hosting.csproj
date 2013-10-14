@@ -132,6 +132,9 @@
     <Reference Include="FluentValidation">
       <HintPath>..\packages\FluentValidation.4.0.0.1\lib\Net40\FluentValidation.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation.Mvc">
+      <HintPath>..\packages\FluentValidation.MVC4.4.0.0.1\lib\Net40\FluentValidation.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.2.0.30506.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
@@ -265,8 +268,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Http\AccountApiController.cs" />
     <Compile Include="Controllers\Web\MainController.cs" />
-    <Compile Include="ExtensionMethods\EntityTypeConfiguration.cs" />
+    <Compile Include="ExtensionMethods\EntityTypeConfigurationExtensionMethods.cs" />
     <Compile Include="ExtensionMethods\HtmlHelperExtensionMethods.cs" />
+    <Compile Include="ExtensionMethods\ValidationResultExtensionMethods.cs" />
     <Compile Include="Filters\Http\ValidateAntiForgeryTokenAttribute.cs" />
     <Compile Include="Filters\Http\ValidationActionFilterAttribute.cs" />
     <Compile Include="HomeController.generated.cs">
@@ -277,6 +281,7 @@
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\ModelStateError.cs" />
     <Compile Include="Models\UserProfile.cs" />
     <Compile Include="MvcControllerBase.cs" />
     <Compile Include="Controllers\Web\SecurityWalkthroughController.cs" />
@@ -302,6 +307,7 @@
     <Compile Include="Security\AuthorizationManager.cs" />
     <Compile Include="Security\SimpleMembershipInitializer.cs" />
     <Compile Include="Security\UserPermissionCacheFactory.cs" />
+    <Compile Include="Services\PrefixlessBody.cs" />
     <Compile Include="Services\ValidatorFactory.cs" />
     <Compile Include="Services\WebSecurityManager.cs" />
     <Compile Include="SharedController.generated.cs">

@@ -96,10 +96,6 @@
             return;
         }
 
-        if (err.ModelState === undefined) {
-            throw new Error("don't know how to handle this server error yet");
-        }
-
         obsServerMessage(err.Message);
 
         var m = model();
@@ -107,14 +103,13 @@
         //for each observable in the model see if a modelStateProperty has been defined
         for (var obs in m) {
             var observable = m[obs];
-            if (observable.modelStateProperty) {
-                var errors = err.ModelState[observable.modelStateProperty];
+            var errors = err.errors[obs];
 
-                if (errors !== undefined) {
-                    //manually set the knockout validation error
-                    observable.setError(errors[0]);
-                }
+            if (errors !== undefined) {
+                //manually set the knockout validation error
+                observable.setError(errors[0]);
             }
+            
         }
     }
 

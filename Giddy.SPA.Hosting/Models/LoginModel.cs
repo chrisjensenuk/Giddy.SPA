@@ -28,7 +28,7 @@ namespace Giddy.SPA.Hosting.Models
     {
         public LoginModelValidator()
         {
-            RuleFor(l => l.UserName).Length(5, 100);
+            RuleFor(l => l.UserName).Length(5, 100).EmailAddress();
             RuleFor(l => l.Password).Length(5, 100);
         }
     }

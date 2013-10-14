@@ -1,18 +1,14 @@
 ﻿define(['plugins/dialog', 'knockout', 'module/server', 'validation'], function (dialog, ko, server) {
 
     var _model = ko.validatedObservable({
-        username: ko.observable(""),
+        userName: ko.observable(""),
         password: ko.observable(""),
         rememberMe: ko.observable(false)
     });
 
     //add validation
-    _model().username.extend({ required: true });
+    _model().userName.extend({ required: true });
     _model().password.extend({ required: true });
-
-    //The name of the property in the server ModelState
-    _model().username.modelStateProperty = 'model.UserName';
-    _model().password.modelStateProperty = 'model.Password';
 
     var _login = function (dialogResult) {
         var self = this;

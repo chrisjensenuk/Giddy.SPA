@@ -25,7 +25,7 @@ namespace Giddy.SPA.Hosting.Services
 
         public IValidator GetValidator(Type type)
         {
-            throw new NotImplementedException();
+            return _serviceprovider.GetService(type) as IValidator;
         }
     }
 }

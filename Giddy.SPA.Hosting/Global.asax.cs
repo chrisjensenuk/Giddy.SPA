@@ -2,6 +2,8 @@
 using Giddy.SPA.Hosting.Filters.Http;
 using Giddy.SPA.Hosting.IoC;
 using Giddy.SPA.Hosting.Security;
+using Giddy.SPA.Hosting.Services;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -9,6 +11,7 @@ using System.Linq;
 using System.Threading;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Validation;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
@@ -20,7 +23,6 @@ namespace Giddy.SPA.Hosting
 
     public class MvcApplication : System.Web.HttpApplication
     {
-        private static SimpleMembershipInitializer _simpleMembershipInitializer;
 
         protected void Application_Start()
         {
@@ -31,11 +33,19 @@ namespace Giddy.SPA.Hosting
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            //Set up the Http View Model filter globally so applied to all Web Api models
-            GlobalConfiguration.Configuration.Filters.Add(new ValidationActionFilterAttribute());
-
             //Set up IoC
-            SimpleInjectorInitializer.Initialize();
+            var container = SimpleInjectorInitializer.Initialize();
+
+            //Prevent ModelState from prefixing properties with unwanted property name
+            GlobalConfiguration.Configuration.Services.Replace(typeof(IBodyModelValidator),
+                new PrefixlessBodyModelValidator(GlobalConfiguration.Configuration.Services.GetBodyModelValidator()));
+
+            //ensure json is returned in camelCase
+            var json = GlobalConfiguration.Configuration.Formatters.JsonFormatter;
+            json.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+
+            //Set up the Http View Model filter globally so applied to all Web Api models
+            GlobalConfiguration.Configuration.Filters.Add(new ValidationActionFilterAttribute(new ValidatorFactory(container)));
 
             //intialize simple membership provider
             SimpleMembershipInitializer.Initialize();
@@ -46,6 +56,7 @@ namespace Giddy.SPA.Hosting
             //create an 'admin' user
             //TODO - abstract this into my own SecurityManager class
             NetSqlAzManInitializer.Seed();
+
         }
 
         protected void Application_AcquireRequestState(Object sender, EventArgs e)

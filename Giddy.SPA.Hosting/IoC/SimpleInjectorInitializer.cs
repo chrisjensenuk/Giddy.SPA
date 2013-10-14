@@ -18,7 +18,7 @@ namespace Giddy.SPA.Hosting.IoC
     public static class SimpleInjectorInitializer
     {
         /// <summary>Initialize the container and register it as MVC Dependency Resolver.</summary>
-        public static void Initialize()
+        public static Container Initialize()
         {
             // Did you know the container can diagnose your configuration? Go to: http://bit.ly/YE8OJj.
             var container = new Container();
@@ -38,7 +38,8 @@ namespace Giddy.SPA.Hosting.IoC
             
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
             GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
-            
+
+            return container;
         }
      
         private static void InitializeContainer(Container container)

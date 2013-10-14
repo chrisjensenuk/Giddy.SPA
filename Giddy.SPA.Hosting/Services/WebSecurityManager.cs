@@ -26,7 +26,7 @@ namespace Giddy.SPA.Hosting.Services
 
     public class WebSecurityManager : ISecurityManager
     {
-        protected readonly IValidatorFactory _validators;
+        private readonly IValidatorFactory _validators;
 
         public WebSecurityManager(IValidatorFactory validators)
         {
