@@ -27,12 +27,12 @@
 
         var dfd = new $.Deferred();
 
-        _ajaxJson('api/login', ko.toJS(loginModel))
+        _ajaxJson('api/login', ko.toJS(loginModel), loginModel)
             .then(function () {
                 _isLoggedIn(true);
                 dfd.resolve();
             })
-            .fail(function (err) {
+            .fail(function (err, loginModel) {
                 _isLoggedIn(false);
                 dfd.reject(err, loginModel);
             });
@@ -50,9 +50,9 @@
 
     //url = the location of the [WebMethod]
     //obj = the object to stringify and submit
-    //done = the callback function to call after a successful post.  function is passed the returned data. 
+    //context = the context. This object will be passed through to the promise then, fail, etc functions
     //return = a jQuery promise
-    var _ajaxJson = function (url, obj) {
+    var _ajaxJson = function (url, obj, context) {
 
         // Create a new Deferred.
         var dfd = new $.Deferred();
@@ -70,15 +70,17 @@
             }
         });
 
+        if (context != null) request.context = context;
+
         request.done(function (data) {
-            dfd.resolve(data);
+            dfd.resolve(data, context);
         });
 
         request.fail(function (xhr, msg) {
             //xhr responseText contains the json ModelState message
             var err = JSON.parse(xhr.responseText);
 
-            dfd.reject(err);
+            dfd.reject(err, context);
         });
 
         return dfd.promise();
