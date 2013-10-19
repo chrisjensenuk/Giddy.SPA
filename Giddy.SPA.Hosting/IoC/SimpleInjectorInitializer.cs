@@ -14,6 +14,7 @@ namespace Giddy.SPA.Hosting.IoC
     using System.Web.Http;
     using FluentValidation;
     using Giddy.SPA.Hosting.Models;
+    using Giddy.SPA.Hosting.Filter.Web;
     
     public static class SimpleInjectorInitializer
     {
@@ -73,6 +74,12 @@ namespace Giddy.SPA.Hosting.IoC
             {
                 handler.AuthorizationMgr = container.GetInstance<IAuthorizationManager>();
             });
+
+            container.RegisterInitializer<GiddyWebAuthorizeAttribute>(handler =>
+            {
+                handler.AuthorizationMgr = container.GetInstance<IAuthorizationManager>();
+            });
+            
 
             container.RegisterInitializer<MvcControllerBase>(handler =>
                 {

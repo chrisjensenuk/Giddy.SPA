@@ -1,4 +1,5 @@
 ﻿using Giddy.SPA.Hosting.Data;
+using Giddy.SPA.Hosting.Filter.Web;
 using Giddy.SPA.Hosting.Filters.Http;
 using Giddy.SPA.Hosting.IoC;
 using Giddy.SPA.Hosting.Security;
@@ -28,13 +29,17 @@ namespace Giddy.SPA.Hosting
         {
             AreaRegistration.RegisterAllAreas();
 
+            //Set up IoC
+            var container = SimpleInjectorInitializer.Initialize();
+
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+
+            GlobalFilters.Filters.Add(container.GetInstance<GiddyWebAuthorizeAttribute>());
+
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            //Set up IoC
-            var container = SimpleInjectorInitializer.Initialize();
 
             //Prevent ModelState from prefixing properties with unwanted property name
             GlobalConfiguration.Configuration.Services.Replace(typeof(IBodyModelValidator),

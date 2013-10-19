@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using Giddy.SPA.Hosting.Filter.Web;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Giddy.SPA.Hosting

@@ -129,6 +129,12 @@
     <Reference Include="DotNetOpenAuth.OpenIdOAuth">
       <HintPath>..\packages\DotNetOpenAuth.OpenIdOAuth.4.3.1.13153\lib\net45-full\DotNetOpenAuth.OpenIdOAuth.dll</HintPath>
     </Reference>
+    <Reference Include="Elmah">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah.Mvc">
+      <HintPath>..\packages\Elmah.MVC.2.1.1\lib\net40\Elmah.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="FluentValidation">
       <HintPath>..\packages\FluentValidation.4.0.0.1\lib\Net40\FluentValidation.dll</HintPath>
     </Reference>
@@ -271,8 +277,10 @@
     <Compile Include="ExtensionMethods\EntityTypeConfigurationExtensionMethods.cs" />
     <Compile Include="ExtensionMethods\HtmlHelperExtensionMethods.cs" />
     <Compile Include="ExtensionMethods\ValidationResultExtensionMethods.cs" />
+    <Compile Include="Filters\AuthorizeOperation.cs" />
     <Compile Include="Filters\Http\ValidateAntiForgeryTokenAttribute.cs" />
     <Compile Include="Filters\Http\ValidationActionFilterAttribute.cs" />
+    <Compile Include="Filters\Web\GiddyWebAuthorizeAttribute.cs" />
     <Compile Include="HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>

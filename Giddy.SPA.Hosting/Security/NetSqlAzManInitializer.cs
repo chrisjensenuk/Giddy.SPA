@@ -130,6 +130,10 @@ namespace Giddy.SPA.Hosting.Security
                     companyATask.AddMember(editAccountsOp);
 
                     viewAccountsOp.CreateAuthorization(dbUser.CustomSid, WhereDefined.Database, dbUser.CustomSid, WhereDefined.Database, AuthorizationType.Allow, null, null);
+
+                    //give admin the ViewErrorLog operation permission
+                    var viewViewErrorLogOperation = app.CreateItem("ViewErrorLog", "Allow user to view the error log", ItemType.Operation);
+                    viewViewErrorLogOperation.CreateAuthorization(dbUser.CustomSid, WhereDefined.Database, dbUser.CustomSid, WhereDefined.Database, AuthorizationType.Allow, null, null);
                 }
                 catch
                 {
