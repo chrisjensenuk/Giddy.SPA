@@ -52,7 +52,13 @@ namespace Giddy.SPA.Hosting.Controllers.Http
                     return request.CreateResponse(HttpStatusCode.BadRequest, "The user name or password provided is incorrect.");
                 }
 
-                return request.CreateResponse(HttpStatusCode.OK, true);
+                //get the routes for the user
+                var routes = new List<DurandalRoute>();
+                routes.Add(new DurandalRoute { Route = new[] { "" }, Title = "Home", ModuleId = "home/index", Nav = true });
+                routes.Add(new DurandalRoute { Route = new[] { "register" }, Title = "Register", ModuleId = "home/register", Nav = true });
+                routes.Add(new DurandalRoute { Route = new[] { "secured" }, Title = "Secured", ModuleId = "home/secure", Nav = true });
+
+                return request.CreateResponse<IEnumerable<DurandalRoute>>(HttpStatusCode.OK, routes);
             });
         }
 

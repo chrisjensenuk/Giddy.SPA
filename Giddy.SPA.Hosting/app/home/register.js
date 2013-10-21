@@ -1,4 +1,4 @@
-﻿define(['knockout', 'module/server'], function (ko, server) {
+﻿define(['knockout', 'module/server', 'plugins/router'], function (ko, server, router) {
     
     //knockout model
     var _model = ko.validatedObservable({
@@ -23,6 +23,7 @@
             .then(function () {
                 //we have succesfully registered and logged in.
                 server.isLoggedIn(true);
+                router.navigate('');
             })
             .fail(function (err, model) {
                 server.mapServerErrorToValidation(err, model, _serverError);

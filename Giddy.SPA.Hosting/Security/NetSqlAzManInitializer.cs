@@ -154,9 +154,19 @@ namespace Giddy.SPA.Hosting.Security
         {
             var provider = (NetSqlAzManRoleProvider)Roles.Provider;
             var storage = provider.GetStorage();
-            var dbUser = storage.GetDBUser(userName);
-            var userPermissionCache = new NetSqlAzMan.Cache.UserPermissionCache(storage, "GiddySPA Store", "GiddySPA", dbUser, true, true);
-            return userPermissionCache;
+            try
+            {
+                var dbUser = storage.GetDBUser(userName);
+                var userPermissionCache = new NetSqlAzMan.Cache.UserPermissionCache(storage, "GiddySPA Store", "GiddySPA", dbUser, true, true);
+                return userPermissionCache;
+            }
+            catch (Exception ex)
+            {
+                //user has probably been deleted
+                return null;
+            }
+
+            
         }
 
         

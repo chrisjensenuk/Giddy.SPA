@@ -1,4 +1,4 @@
-﻿define(['jquery', 'knockout'], function ($, ko) {
+﻿define(['jquery', 'knockout', 'plugins/router'], function ($, ko, router) {
 
     //Are we logged in or not (Boolean) 
     var _isLoggedIn = ko.observable();
@@ -28,8 +28,14 @@
         var dfd = new $.Deferred();
 
         _ajaxJson('api/login', ko.toJS(loginModel), loginModel)
-            .then(function () {
+            .then(function (routerConfig) {
                 _isLoggedIn(true);
+                
+                //set the routes
+                router.routes = [];
+                router.map(routerConfig)
+                    .buildNavigationModel();
+
                 dfd.resolve();
             })
             .fail(function (err, loginModel) {
