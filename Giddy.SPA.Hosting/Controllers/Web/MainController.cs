@@ -11,6 +11,7 @@ namespace Giddy.SPA.Hosting.Controllers.Web
     {
         [HttpGet]
         [GET("/Main")]
+        [AllowAnonymous]
         public virtual ActionResult Index()
         {
             return View();

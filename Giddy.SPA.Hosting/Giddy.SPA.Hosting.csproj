@@ -290,6 +290,7 @@
     </Compile>
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ModelStateError.cs" />
+    <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\UserProfile.cs" />
     <Compile Include="MvcControllerBase.cs" />
     <Compile Include="Controllers\Web\SecurityWalkthroughController.cs" />
@@ -335,6 +336,8 @@
   <ItemGroup>
     <Content Include="app\home\index.html" />
     <Content Include="app\home\index.js" />
+    <Content Include="app\home\register.html" />
+    <Content Include="app\home\register.js" />
     <Content Include="app\login\login.html" />
     <Content Include="app\login\login.js" />
     <Content Include="app\main.js" />

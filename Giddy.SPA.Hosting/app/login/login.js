@@ -10,6 +10,9 @@
     _model().userName.extend({ required: true });
     _model().password.extend({ required: true });
 
+    //server error message
+    var _serverError = ko.observable();
+
     var _login = function (dialogResult) {
         var self = this;
 
@@ -40,6 +43,6 @@
         login: _login,
         show: _show,
         close: _close,
-        serverError: ko.observable()
+        serverError: _serverError
     }
 });

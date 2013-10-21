@@ -24,7 +24,7 @@ namespace Giddy.SPA.Hosting.Controllers.Http
         {
             _securityMgr = securityMgr;
         }
- 
+
 
         [HttpGet]
         //[AllowAnonymous]
@@ -86,13 +86,17 @@ namespace Giddy.SPA.Hosting.Controllers.Http
                     AntiForgery.GetTokens(null, out newCookieToken, out formToken);
 
                     var response = request.CreateResponse(HttpStatusCode.OK, formToken);
-                    response.Headers.AddCookies(new[] { new CookieHeaderValue(AntiForgeryConfig.CookieName, newCookieToken) });
+
+                    var antiforgeryCookie = new CookieHeaderValue(AntiForgeryConfig.CookieName, newCookieToken);
+                    
+                    response.Headers.AddCookies(new[] { antiforgeryCookie });
                     return response;
                 });
         }
 
         [HttpPost]
         [AllowAnonymous]
+        [POST("/api/register")]
         [ValidateAntiForgeryToken]
         public virtual HttpResponseMessage Register(HttpRequestMessage request, RegisterModel model)
         {
@@ -112,8 +116,6 @@ namespace Giddy.SPA.Hosting.Controllers.Http
 
             });
         }
-
-       
-        }
     }
+}
 

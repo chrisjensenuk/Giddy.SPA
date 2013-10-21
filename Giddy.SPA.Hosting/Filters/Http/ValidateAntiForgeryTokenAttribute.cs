@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -25,6 +26,8 @@ namespace Giddy.SPA.Hosting.Filters.Http
                     .Select(c => c[AntiForgeryConfig.CookieName])
                     .FirstOrDefault();
                 var rvt = headers.GetValues("__RequestVerificationToken").FirstOrDefault();
+                
+                if(cookie != null)Debug.WriteLine("cookie=" + cookie.Value + " | rvt=" + rvt);
                 AntiForgery.Validate(cookie != null ? cookie.Value : null, rvt);
             }
             catch(Exception ex)

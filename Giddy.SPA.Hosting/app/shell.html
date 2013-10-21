@@ -11,6 +11,13 @@
 <div class="collapse navbar-collapse navbar-ex2-collapse">
     <button type="button" class="btn btn-default navbar-btn" data-bind="visible: !isLoggedIn(), click:login">Sign in</button>
     <button type="button" class="btn btn-default navbar-btn" data-bind="visible: isLoggedIn(), click:logout">Sign out</button>
+
+    <ul class="nav" data-bind="foreach: router.navigationModel">
+        <li data-bind="css: { active: isActive }">
+            <a data-bind="attr: { href: hash }, html: title"></a>
+        </li>
+    </ul>
+
 </div>
 </nav>
 

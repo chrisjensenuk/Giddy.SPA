@@ -1,0 +1,35 @@
+﻿<div>
+
+    <fieldset>
+        <legend>Register</legend>
+
+        <div class="text-danger" data-bind="text: serverError, visible: serverError()"></div>
+
+        <!-- ko with: model -->
+        <div>
+            <label for="userName">User Name:</label>
+            <input id="userName" data-bind="value: userName, valueUpdate: 'keyup'" />
+        </div>
+
+        <div>
+            <label for="fullName">Full Name:</label>
+            <input id="fullName" data-bind="value: fullName, valueUpdate: 'keyup'" />
+        </div>
+
+        <div>
+            <label for="password">Password:</label>
+            <input id="password" data-bind="value: password, valueUpdate: 'keyup'" />
+        </div>
+
+        <div>
+            <label for="confirmPassword">Confirm Password:</label>
+            <input id="confirmPassword" data-bind="value: confirmPassword, valueUpdate: 'keyup'" />
+        </div>
+        <!-- /ko -->
+
+        <div>
+            <button data-bind="click: register, enable: model.isValid">Register</button> 
+        </div>
+
+    </fieldset>
+</div>

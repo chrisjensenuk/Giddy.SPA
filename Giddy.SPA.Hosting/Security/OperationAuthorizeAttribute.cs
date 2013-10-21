@@ -11,6 +11,9 @@ using System.Reflection;
 
 namespace Giddy.SPA.Hosting.Security
 {
+    /// <summary>
+    /// currently not used. Look at GiddyWebAuthorizeAttribute
+    /// </summary>
     [AttributeUsage(AttributeTargets.Method, AllowMultiple=false)]
     public class OperationAuthorizeAttribute : AuthorizeAttribute, IActionFilter
     {

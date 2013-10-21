@@ -7,7 +7,8 @@
         server.checkIsLoggedIn();
 
         return router.map([
-            { route: [''], moduleId: 'home/index', title: 'Home', nav: true }
+            { route: [''], moduleId: 'home/index', title: 'Home', nav: true },
+            { route: ['register'], moduleId: 'home/register', title: 'Register', nav: true }
         ]).buildNavigationModel()
           .activate();
     }
