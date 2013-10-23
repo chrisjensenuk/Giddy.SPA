@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Giddy.SPA.Hosting.Models;
+using Giddy.SPA.Hosting.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,7 +33,6 @@ namespace Giddy.SPA.Hosting.Services
         {
             _validators = validators;
         }
-
 
         public bool LoggedIn
         {

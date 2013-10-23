@@ -22,4 +22,9 @@ namespace Giddy.SPA.Hosting.Models
         public string ModuleId { get; set; }
         public bool? Nav {get;set;}
     }
+
+    public class SecuredDurandalRoute : DurandalRoute
+    {
+        public string Operation { get; set; }
+    }
 }
