@@ -37,10 +37,14 @@ namespace Giddy.SPA.Hosting.Security
                 if (permissionCache == null)
                 {
                     //we don't have a cache. Probably because we are using webapi and not using Session.
+                    if (string.IsNullOrEmpty(HttpContext.Current.User.Identity.Name)) return false;
 
                     var provider = (NetSqlAzManRoleProvider)Roles.Provider;
                     var storage = provider.GetStorage();
                     var dbUser = storage.GetDBUser(HttpContext.Current.User.Identity.Name);
+
+                    if (dbUser == null) return false;
+
                     access = storage.CheckAccess("GiddySPA Store", "GiddySPA", operation, dbUser, DateTime.Now, true, null);
                 }
                 else

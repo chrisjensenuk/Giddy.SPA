@@ -69,6 +69,8 @@ namespace Giddy.SPA.Hosting.IoC
             container.RegisterPerWebRequest<IAuthorizationManager, AuthorizationManager>();
 
             container.Register<IUserPermissionCacheFactory, UserPermissionCacheFactory>();
+
+            container.Register<IDurandalRouteManager, DurandalRouteManager>();
             
             container.RegisterInitializer<OperationAuthorizeAttribute>(handler =>
             {

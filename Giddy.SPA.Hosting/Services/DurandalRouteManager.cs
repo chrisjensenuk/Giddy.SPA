@@ -34,13 +34,19 @@ namespace Giddy.SPA.Hosting.Services
             foreach (var route in _routeDictionary)
             {
                 //if it is a secured route ensure we are authorized to use it
-                if (route is SecuredDurandalRoute && _authorizationMgr.CheckAccess(((SecuredDurandalRoute)route).Operation))
+                if (route is SecuredDurandalRoute)
                 {
+                    if(_authorizationMgr.CheckAccess(((SecuredDurandalRoute)route).Operation))
+                    {
+                        yield return route;
+                    }
+                }
+                else
+                {
+                    //this is an unsecured route
                     yield return route;
                 }
 
-                //this is an unsecured route
-                yield return route;
                 
             }
         }

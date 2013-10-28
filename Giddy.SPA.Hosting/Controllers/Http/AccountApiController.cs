@@ -27,9 +27,19 @@ namespace Giddy.SPA.Hosting.Controllers.Http
             _durandalRouteManager = durandalRouteMgr;
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        [GET("api/userroutes")]
+        public HttpResponseMessage UserRoutes(HttpRequestMessage request)
+        {
+            return BuildHttpResponse(request, () =>
+            {
+                return _durandalRouteManager.GetRoutes();
+            });
+        }
 
         [HttpGet]
-        //[AllowAnonymous]
+        [AllowAnonymous]
         [GET("/api/checkloggedin")]
         public HttpResponseMessage CheckLoggedIn(HttpRequestMessage request)
         {
@@ -54,9 +64,7 @@ namespace Giddy.SPA.Hosting.Controllers.Http
                     return request.CreateResponse(HttpStatusCode.BadRequest, "The user name or password provided is incorrect.");
                 }
 
-                var routes = _durandalRouteManager.GetRoutes();
-
-                return request.CreateResponse<IEnumerable<DurandalRoute>>(HttpStatusCode.OK, routes);
+                return request.CreateResponse(HttpStatusCode.OK, true);
             });
         }
 

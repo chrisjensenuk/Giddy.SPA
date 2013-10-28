@@ -7,19 +7,26 @@
     var _rvt = ko.observable();
 
     _isLoggedIn.subscribe(function (isLoggedIn) {
-        //we are changing from anonymous session to an authenticated session or vice versa.  We will need a new Request Verification Token
-        $.getJSON('api/rvt')
-            .then(function (rvt) {
-                _rvt(rvt);
-            });
+        //we are changing from anonymous session to an authenticated session or vice versa.  We will need a new Request Verification Token and the user routes
+        $.when($.getJSON('api/rvt'),
+            $.getJSON('api/userroutes'))
+        .done(function (rvt, routes) {
+            //Set the request verification token
+            _rvt(rvt[0]);
+
+            //set the routes
+            router.routes = [];
+            router.map(routes[0]).buildNavigationModel();
+        });
     });
 
     //Check user is authenticated on the server
     var _checkIsLoggedIn = function () {
-        //check if the user is authorized
-        $.get('/api/checkloggedin').then(function (isLoggedIn) {
-            _isLoggedIn(isLoggedIn);
-        });
+        //check if the user is authorized. returns ajax promise
+        return $.get('/api/checkloggedin')
+            .then(function (isLoggedIn) {
+                _isLoggedIn(isLoggedIn);
+            });
     }
 
     //try logging in using the supplied username and passsword
@@ -30,12 +37,6 @@
         _ajaxJson('api/login', ko.toJS(loginModel), loginModel)
             .then(function (routerConfig) {
                 _isLoggedIn(true);
-                
-                //set the routes
-                router.routes = [];
-                router.map(routerConfig)
-                    .buildNavigationModel();
-
                 dfd.resolve();
             })
             .fail(function (err, loginModel) {
@@ -92,8 +93,6 @@
         return dfd.promise();
     }
 
-    //Errors from the server could just be string value containing the message or a representation of the server ModelState. If so map the ModelState to knockout validation
-    //You need to add a property to each validated observable. E.g. username.modelStateProperty = 'model.UserName';
     //Err = error sent from the server (a string or the ModelState object)
     //model = the observable model what was sent to the server
     //obsServerMessage = the observable to write the server error message to.

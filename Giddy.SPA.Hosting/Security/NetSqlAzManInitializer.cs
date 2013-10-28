@@ -134,6 +134,10 @@ namespace Giddy.SPA.Hosting.Security
                     //give admin the ViewErrorLog operation permission
                     var viewViewErrorLogOperation = app.CreateItem("ViewErrorLog", "Allow user to view the error log", ItemType.Operation);
                     viewViewErrorLogOperation.CreateAuthorization(dbUser.CustomSid, WhereDefined.Database, dbUser.CustomSid, WhereDefined.Database, AuthorizationType.Allow, null, null);
+                
+                    //add a secured route
+                    var securedRoute = app.CreateItem("ROUTE|secured", "user is allowed to request this route", ItemType.Operation);
+                    securedRoute.CreateAuthorization(dbUser.CustomSid, WhereDefined.Database, dbUser.CustomSid, WhereDefined.Database, AuthorizationType.Allow, null, null);
                 }
                 catch
                 {

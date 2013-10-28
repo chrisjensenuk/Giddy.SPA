@@ -3,14 +3,9 @@
     var _activate = function () {
         var self = this;
 
-        //check if we are loggged in
-        server.checkIsLoggedIn();
+        //check if we are loggged in. This will also set up Request Verifiration Token and Routes
+        return server.checkIsLoggedIn();
 
-        return router.map([
-            { route: [''], moduleId: 'home/index', title: 'Home', nav: true },
-            { route: ['register'], moduleId: 'home/register', title: 'Register', nav: true }
-        ]).buildNavigationModel()
-          .activate();
     }
 
     var _login = function (loginModel) {
