@@ -19,7 +19,7 @@ namespace Giddy.SPA.Hosting.Services
         {
             new DurandalRoute { Route = new[] { "" }, Title = "Home", ModuleId = "home/index", Nav = true },
             new DurandalRoute { Route = new[] { "register" }, Title = "Register", ModuleId = "home/register", Nav = true },
-            new SecuredDurandalRoute {Operation = "ROUTE|secured", Route = new[] { "secured" }, Title = "Secured", ModuleId = "home/secure", Nav = true },
+            new SecuredDurandalRoute {Operation = "ROUTE|secured", Route = new[] { "secured" }, Title = "Secured", ModuleId = "secure/index", Nav = true },
         };
 
         private IAuthorizationManager _authorizationMgr;

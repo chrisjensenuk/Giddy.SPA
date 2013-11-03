@@ -17,6 +17,7 @@
             //set the routes
             router.routes = [];
             router.map(routes[0]).buildNavigationModel();
+            return router.activate();
         });
     });
 

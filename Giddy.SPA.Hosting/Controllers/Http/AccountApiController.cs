@@ -19,24 +19,13 @@ namespace Giddy.SPA.Hosting.Controllers.Http
     public class AccountApiController : ApiControllerBase
     {
         private readonly ISecurityManager _securityMgr;
-        private readonly IDurandalRouteManager _durandalRouteManager; 
 
-        public AccountApiController(ISecurityManager securityMgr, IDurandalRouteManager durandalRouteMgr)
+        public AccountApiController(ISecurityManager securityMgr)
         {
             _securityMgr = securityMgr;
-            _durandalRouteManager = durandalRouteMgr;
         }
 
-        [HttpGet]
-        [AllowAnonymous]
-        [GET("api/userroutes")]
-        public HttpResponseMessage UserRoutes(HttpRequestMessage request)
-        {
-            return BuildHttpResponse(request, () =>
-            {
-                return _durandalRouteManager.GetRoutes();
-            });
-        }
+        
 
         [HttpGet]
         [AllowAnonymous]

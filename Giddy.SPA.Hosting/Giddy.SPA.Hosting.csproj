@@ -273,6 +273,7 @@
     <Compile Include="App_Start\GlobalConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\Http\AccountApiController.cs" />
+    <Compile Include="Controllers\Http\RouteApiController.cs" />
     <Compile Include="Controllers\Web\MainController.cs" />
     <Compile Include="ExtensionMethods\EntityTypeConfigurationExtensionMethods.cs" />
     <Compile Include="ExtensionMethods\HtmlHelperExtensionMethods.cs" />
@@ -345,6 +346,8 @@
     <Content Include="app\main.js" />
     <Content Include="app\module\authorize.js" />
     <Content Include="app\module\server.js" />
+    <Content Include="app\secure\index.html" />
+    <Content Include="app\secure\index.js" />
     <Content Include="app\shell.html" />
     <Content Include="app\shell.js" />
     <Content Include="Content\bootstrap\bootstrap-theme.css" />
