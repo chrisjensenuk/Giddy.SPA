@@ -1,0 +1,30 @@
+﻿<div>
+
+    <fieldset>
+        <legend>Manage</legend>
+
+        <div class="text-danger" data-bind="text: serverError, visible: serverError()"></div>
+
+        <!-- ko with: model -->
+        <div>
+            <label for="userName">Old Password:</label>
+            <input id="userName" data-bind="value: oldPassword, valueUpdate: 'keyup'" />
+        </div>
+
+        <div>
+            <label for="fullName">New Password:</label>
+            <input id="fullName" data-bind="value: newPassword, valueUpdate: 'keyup'" />
+        </div>
+
+        <div>
+            <label for="confirmPassword">Confirm Password:</label>
+            <input id="confirmPassword" data-bind="value: confirmPassword, valueUpdate: 'keyup'" />
+        </div>
+        <!-- /ko -->
+
+        <div>
+            <button data-bind="click: manage, enable: model.isValid">Change Password</button> 
+        </div>
+
+    </fieldset>
+</div>

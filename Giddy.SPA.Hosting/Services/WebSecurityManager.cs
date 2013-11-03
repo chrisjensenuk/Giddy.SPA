@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using Giddy.SPA.Hosting.Models;
 using Giddy.SPA.Hosting.Security;
+using Microsoft.Web.WebPages.OAuth;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace Giddy.SPA.Hosting.Services
         bool Login(LoginModel login);
         void Logout();
         void Register(RegisterModel registerModel);
+        void ChangePassword(LocalPasswordModel localPasswordModel);
     }
 
     public class SecurityManagerException : Exception
@@ -70,6 +72,41 @@ namespace Giddy.SPA.Hosting.Services
             catch (MembershipCreateUserException e)
             {
                 throw new SecurityManagerException(ErrorCodeToString(e.StatusCode), e);
+            }
+        }
+
+        public void ChangePassword(LocalPasswordModel localPasswordModel)
+        {
+            
+            bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(HttpContext.Current.User.Identity.Name));
+            
+            if (hasLocalAccount)
+            {
+                
+                // ChangePassword will throw an exception rather than return false in certain failure scenarios.
+
+                try
+                {
+                    WebSecurity.ChangePassword(HttpContext.Current.User.Identity.Name,
+                        localPasswordModel.OldPassword, localPasswordModel.NewPassword);
+                }
+                catch (Exception ex)
+                {
+                    throw new SecurityManagerException("The current password is incorrect or the new password is invalid.", ex);
+                }
+            }
+            else
+            {
+                //create an account if it is not a local account
+                try
+                {
+                    WebSecurity.CreateAccount(HttpContext.Current.User.Identity.Name, localPasswordModel.NewPassword);
+                }
+                catch (Exception ex)
+                {
+                    throw new SecurityManagerException(String.Format("Unable to create local account. An account with the name \"{0}\" may already exist.", HttpContext.Current.User.Identity.Name), ex);
+                }
+                
             }
         }
 

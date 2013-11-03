@@ -24,6 +24,10 @@ namespace Giddy.SPA.Hosting.Models
 
     }
 
+    //Routes that should only be shown to anonymous users
+    public class AnonymousDurandalRoute : DurandalRoute{}
+
+    //Operation based secured routes
     public class SecuredDurandalRoute : DurandalRoute
     {
         public string Operation { get; set; }

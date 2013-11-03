@@ -277,6 +277,7 @@
     <Compile Include="Controllers\Web\MainController.cs" />
     <Compile Include="ExtensionMethods\EntityTypeConfigurationExtensionMethods.cs" />
     <Compile Include="ExtensionMethods\HtmlHelperExtensionMethods.cs" />
+    <Compile Include="ExtensionMethods\HttpRequestMessageExtensionMethods.cs" />
     <Compile Include="ExtensionMethods\ValidationResultExtensionMethods.cs" />
     <Compile Include="Filters\AuthorizeOperation.cs" />
     <Compile Include="Filters\Http\ValidateAntiForgeryTokenAttribute.cs" />
@@ -289,8 +290,9 @@
     <Compile Include="MainController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\LocalPasswordModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
-    <Compile Include="Models\ModelStateError.cs" />
+    <Compile Include="Models\GiddyHttpError.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Models\DurandalRoute.cs" />
     <Compile Include="Models\UserProfile.cs" />
@@ -339,15 +341,15 @@
   <ItemGroup>
     <Content Include="app\home\index.html" />
     <Content Include="app\home\index.js" />
-    <Content Include="app\home\register.html" />
-    <Content Include="app\home\register.js" />
+    <Content Include="app\account\register.html" />
+    <Content Include="app\account\register.js" />
     <Content Include="app\login\login.html" />
     <Content Include="app\login\login.js" />
     <Content Include="app\main.js" />
     <Content Include="app\module\authorize.js" />
     <Content Include="app\module\server.js" />
-    <Content Include="app\secure\index.html" />
-    <Content Include="app\secure\index.js" />
+    <Content Include="app\account\manage.html" />
+    <Content Include="app\account\manage.js" />
     <Content Include="app\shell.html" />
     <Content Include="app\shell.js" />
     <Content Include="Content\bootstrap\bootstrap-theme.css" />

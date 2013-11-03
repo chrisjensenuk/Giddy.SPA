@@ -8,11 +8,11 @@
     </button>
     <a class="navbar-brand" href="#">Giddy SPA</a>
 </div>
-<div class="collapse navbar-collapse navbar-ex2-collapse">
+<div class="collapse navbar-collapse">
     <button type="button" class="btn btn-default navbar-btn" data-bind="visible: !isLoggedIn(), click:login">Sign in</button>
     <button type="button" class="btn btn-default navbar-btn" data-bind="visible: isLoggedIn(), click:logout">Sign out</button>
 
-    <ul class="nav" data-bind="foreach: router.navigationModel">
+    <ul class="nav navbar-nav" data-bind="foreach: router.navigationModel">
         <li data-bind="css: { active: isActive }">
             <a data-bind="attr: { href: hash }, html: title"></a>
         </li>

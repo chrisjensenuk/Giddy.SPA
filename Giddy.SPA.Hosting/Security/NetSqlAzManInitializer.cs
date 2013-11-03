@@ -135,8 +135,8 @@ namespace Giddy.SPA.Hosting.Security
                     var viewViewErrorLogOperation = app.CreateItem("ViewErrorLog", "Allow user to view the error log", ItemType.Operation);
                     viewViewErrorLogOperation.CreateAuthorization(dbUser.CustomSid, WhereDefined.Database, dbUser.CustomSid, WhereDefined.Database, AuthorizationType.Allow, null, null);
                 
-                    //add a secured route
-                    var securedRoute = app.CreateItem("ROUTE|secured", "user is allowed to request this route", ItemType.Operation);
+                    //add a secured route - allow the user to change their password
+                    var securedRoute = app.CreateItem("ROUTE|manage", "user is allowed to request this route", ItemType.Operation);
                     securedRoute.CreateAuthorization(dbUser.CustomSid, WhereDefined.Database, dbUser.CustomSid, WhereDefined.Database, AuthorizationType.Allow, null, null);
                 }
                 catch

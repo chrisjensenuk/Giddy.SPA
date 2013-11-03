@@ -50,7 +50,7 @@ namespace Giddy.SPA.Hosting.Controllers.Http
 
                 if (!loggedIn)
                 {
-                    return request.CreateResponse(HttpStatusCode.BadRequest, "The user name or password provided is incorrect.");
+                    return request.CreateGiddyErrorResponse("The user name or password provided is incorrect.");
                 }
 
                 return request.CreateResponse(HttpStatusCode.OK, true);
@@ -110,11 +110,30 @@ namespace Giddy.SPA.Hosting.Controllers.Http
 
                     return request.CreateResponse(HttpStatusCode.OK, true);
                 }
-                catch (SecurityManagerException e)
+                catch (SecurityManagerException ex)
                 {
-                    return request.CreateErrorResponse(HttpStatusCode.BadRequest, e.Message);
+                    return request.CreateGiddyErrorResponse(ex.Message);
                 }
 
+            });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [POST("api/manage")]
+        public virtual HttpResponseMessage Manage(HttpRequestMessage request, LocalPasswordModel model)
+        {
+            return BuildHttpResponse(request, () =>
+            {
+                try
+                {
+                    _securityMgr.ChangePassword(model);
+                    return request.CreateResponse(HttpStatusCode.OK, true);
+                }
+                catch (SecurityManagerException ex)
+                {
+                    return request.CreateGiddyErrorResponse(ex.Message);
+                }
             });
         }
     }

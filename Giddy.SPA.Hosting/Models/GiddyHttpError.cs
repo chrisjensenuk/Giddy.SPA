@@ -6,17 +6,25 @@ using System.Web.Http.ModelBinding;
 
 namespace Giddy.SPA.Hosting.Models
 {
-    
-    public class ModelStateError
+    //A wrapper for Errors and ModelStateErrors so I can be more explicit about the representation of the error in JSON
+    public class GiddyHttpError
     {
         public string Message { get; set; }
         public IDictionary<string, IEnumerable<string>> Errors { get; set; }
 
-        public ModelStateError(ModelStateDictionary modelState, string message = null)
+        public GiddyHttpError()
+        {
+            Errors = new Dictionary<string, IEnumerable<string>>();
+        }
+
+        public GiddyHttpError(string message = null) : base()
         {
             Message = message ?? "Your request is invalid.";
-            Errors = new Dictionary<string, IEnumerable<string>>();
+        }
 
+        public GiddyHttpError(ModelStateDictionary modelState, string message = null) : this (message)
+        {
+            
             foreach (var item in modelState)
             {
                 var itemErrors = new List<string>();

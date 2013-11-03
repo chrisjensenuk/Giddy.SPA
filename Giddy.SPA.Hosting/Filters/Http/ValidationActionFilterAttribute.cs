@@ -49,7 +49,7 @@ namespace Giddy.SPA.Hosting.Filters.Http
             if (!modelState.IsValid)
             {
                 //wrap the modelState in object I can control the json representation of.
-                var httpError = new ModelStateError(modelState);
+                var httpError = new GiddyHttpError(modelState);
                 actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.BadRequest, httpError);
             }
         }

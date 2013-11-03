@@ -18,15 +18,17 @@ namespace Giddy.SPA.Hosting.Services
         private static IEnumerable<DurandalRoute> _routeDictionary = new List<DurandalRoute>
         {
             new DurandalRoute { Route = new[] { "" }, Title = "Home", ModuleId = "home/index", Nav = true },
-            new DurandalRoute { Route = new[] { "register" }, Title = "Register", ModuleId = "home/register", Nav = true },
-            new SecuredDurandalRoute {Operation = "ROUTE|secured", Route = new[] { "secured" }, Title = "Secured", ModuleId = "secure/index", Nav = true },
+            new AnonymousDurandalRoute { Route = new[] { "register" }, Title = "Register", ModuleId = "account/register", Nav = true },
+            new SecuredDurandalRoute {Operation = "ROUTE|manage", Route = new[] { "manage" }, Title = "Change Password", ModuleId = "account/manage", Nav = true },
         };
 
+        private ISecurityManager _securityMgr;
         private IAuthorizationManager _authorizationMgr;
  
-        public DurandalRouteManager(IAuthorizationManager authorizationMgr)
+        public DurandalRouteManager(ISecurityManager securityMgr, IAuthorizationManager authorizationMgr)
         {
             _authorizationMgr = authorizationMgr;
+            _securityMgr = securityMgr;
         }
 
         public IEnumerable<DurandalRoute> GetRoutes()
@@ -41,10 +43,21 @@ namespace Giddy.SPA.Hosting.Services
                         yield return route;
                     }
                 }
-                else
+                else if (route is AnonymousDurandalRoute)
+                {
+                    if (!_securityMgr.LoggedIn)
+                    {
+                        yield return route;
+                    }
+                }
+                else if (route is DurandalRoute)
                 {
                     //this is an unsecured route
                     yield return route;
+                }
+                else
+                {
+                    throw new NotImplementedException("Don;t know how to handle this route type");
                 }
 
                 
